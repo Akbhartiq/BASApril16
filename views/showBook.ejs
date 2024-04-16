@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .book-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .book-image {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .book-title {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .book-author {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .isbn {
+            margin-top: 10px;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 20px;
+            color: green;
+            margin-top: 10px;
+        }
+
+        .freq {
+            font-weight: bold;
+            font-size: 20px;
+            color: rgb(57, 32, 198);
+            margin-top: 10px;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <% if (book) { %>
+        <div class="book-container">
+            <img class="book-image" src="./bookimage.jpg" alt="Book Cover">
+            <div class="book-details">
+                <h2 class="book-title">
+                    <%= book.title %>
+                </h2>
+                <p class="book-author">by <%= book.author %>
+                </p>
+                <p class="isbn">ISBN: <%= book.isbn %>
+                </p>
+                <p class="price">$<%= book.price %>
+                </p>
+                <p class="freq">Number Of Demands: <%= book.freq %>
+                </p>
+            </div>
+        </div>
+        <% } else { %>
+            <p>No book found.</p>
+            <% } %>
+</body>
+
+</html>

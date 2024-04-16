@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Below Thresold Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            z-index: -1;
+            background-image: url("./blue-cyan-minimalism-gradient-wallpaper-preview\ \(1\).jpg");
+
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .books-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            color: #fff;
+        }
+
+
+        .book-card {
+            width: calc(33.33% - 60px);
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .book-card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 0, 0, 0);
+            /* Adjust opacity on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            /* Adjust box shadow on hover */
+        }
+
+        .details {
+            padding: 20px;
+            color: #fff;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        p {
+            margin: 0;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+        }
+
+        .ignore-button,
+        .search-button,
+        .order-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 80px;
+            margin-left: 80px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+
+        .ignore-button {
+            background-color: #B1D4E0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .ignore-button:hover {
+            background-color: #B1D4E0;
+        }
+
+        .search-button {
+            background-color: #6AABD2;
+            color: #fff;
+            text-align: center;
+        }
+
+        .search-button:hover {
+            background-color: #6AABD2;
+        }
+
+        .order-button {
+            background-color: #0C2D48;
+            color: #fff;
+            text-align: center;
+        }
+
+        .order-button:hover {
+            background-color: #0C2D48;
+        }
+
+        /* Add a specific style for the action buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        /* Add a specific style for the action buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        /* Style for the dialogue box */
+        .dialog-box {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        /* Style for the dialogue box input and button */
+        .dialog-box input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .dialog-box button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .dialog-box button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <h1>Books with less than <//%=val%> copies -->
+        </h1>
+        <div>
+            <h1>total amount :- <%= total %></h1>
+            <h1>no of books :- <%= books.length %></h1>
+        </div>
+        <div class="books-container">
+            <% books.forEach((book, index)=> { %>
+                <div class="book-card" id="book<%= index %>">
+                    <div class="details">
+                        <h2>
+                            <%= book.title %>
+                        </h2>
+                        <p>Author: <%= book.author %>
+                        </p>
+                        <p>frequency: <%= book.frequency %>
+                        </p>
+                        <p>Buyer: <%= book.details.Buyer %>
+                        </p>
+                        <p>Seller: <%= book.details.Seller%>
+                        </p>
+                        <p>Date: <%= book.currdate %>
+                        </p>
+                        <p>price: <%= book.price %>
+                        </p>
+
+
+                    </div>
+                    <!-- Dialogue box for placing order -->
+                    <div class="dialog-box" id="dialog<%= index %>">
+                        <input type="number" id="quantity<%= index %>" placeholder="Enter quantity" min="1" required>
+                        <button
+                            onclick="orderBook('<%= book.title %>', '<%= book.author %>', '<%= book.ISBN %>','<%=book.price%>','<%=index%>')">Confirm</button>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+
+    <script>
+        /* Function to remove the book card from the page */
+        async function ignoreBook(bookId, index) {
+            try {
+                // Remove the corresponding book card from the page
+                document.getElementById('book' + index).remove();
+            } catch (error) {
+                console.error('Error ignoring book:', error);
+            }
+        }
+
+        /* Function to search for books online */
+        async function searchOnline(title, author) {
+            window.location.href = `/search-online?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}`;
+        }
+
+        /* Function to display the dialogue box for placing order */
+        function showOrderDialogue(index) {
+            const dialogBox = document.getElementById('dialog' + index);
+            dialogBox.style.display = 'block';
+        }
+
+        /* Function to order the book */
+        async function orderBook(title, author, ISBN, price, index) {
+            const quantity = document.getElementById('quantity' + index).value;
+            console.log(quantity);
+
+            try {
+                const response = await fetch('/order_book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        author: author,
+                        ISBN: ISBN,
+                        quantity: quantity,
+                        price: price
+                    })
+                });
+                if (response.ok) {
+                    console.log('Book ordered successfully:', quantity, 'copies of', title, 'by', author);
+                    // Hide the dialogue box after ordering
+                    document.getElementById('dialog' + index).style.display = 'none';
+                    // You can also perform any other actions here, such as showing a success message
+                } else {
+                    console.error('Failed to order book:', response.statusText);
+                    // Handle failed request
+                }
+            } catch (error) {
+                console.error('Error ordering book:', error);
+                // Handle error
+            }
+        }
+
+    </script>
+</body>
+
+</html>

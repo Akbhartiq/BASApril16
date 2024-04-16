@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            z-index: -1;
+            background-image: url("./blue-cyan-minimalism-gradient-wallpaper-preview\ \(1\).jpg");
+        }
+
+
+        .container {
+            background-color: #cde4f6;
+            /* Light bluish color */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0.3, 0.3, 0.3, 5);
+            /* Shadow effect */
+            width: 400px;
+            padding: 40px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 50px;
+            /* Adjust as needed */
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-color: #ccc;
+            /* Placeholder color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #fff;
+        }
+
+        .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .profile-details h2 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .profile-details h3,
+        .profile-details p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .edit-profile-form,
+        .sign-out-form {
+            margin-top: 20px;
+        }
+
+        .form-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .form-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+
+        /* Style for the button */
+        button[type="submit"] {
+            background-color: #4CAF50;
+            /* Green background */
+            border: none;
+            /* Remove border */
+            color: white;
+            /* White text */
+            padding: 10px 20px;
+            /* Padding */
+            text-align: center;
+            /* Center text */
+            text-decoration: none;
+            /* Remove underline */
+            display: inline-block;
+            /* Display as inline block */
+            font-size: 16px;
+            /* Font size */
+            cursor: pointer;
+            /* Cursor on hover */
+            border-radius: 5px;
+            /* Rounded corners */
+        }
+
+        /* Hover effect */
+        button[type="submit"]:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="profile-pic">
+            <span>&#x1F464;</span> <!-- Person symbol -->
+        </div>
+        <div class="profile-details">
+            <h2 style="font-family: cursive;">
+                <%= locals.customer.get("fullname")%>
+            </h2>
+            <h3 style="font-family: cursive;">
+                <%= locals.customer.get("gmail")%>
+            </h3>
+            <p style="font-family: cursive;">
+                Address :: <%= locals.customer.get("address")%>
+            </p>
+            <p>+91<%= locals.customer.get("phonenumber")%>
+            </p>
+        </div>
+
+        <form class="edit-profile-form" action="/individualspage?gmail=<%= locals.customer.get("gmail") %>"
+            method="post">
+            <button class="form-button" type="submit">Edit Profile</button>
+        </form>
+
+        <form class="sign-out-form" action="/individualspage" method="post">
+            <button class="form-button" type="submit">Sign Out</button>
+        </form>
+
+    </div>
+    <div style=" padding: 10px;">
+        <form action="/get-notifications" method="get">
+            <input type="hidden" name="gmail" value="<%= locals.customer.get('gmail') %>">
+            <button type="submit">Get Notifications</button>
+        </form>
+        <form action="/cust_hist" method="get">
+            <input type="hidden" name="gmail" value="<%= locals.customer.get('gmail') %>">
+            <button type="submit">Get History</button>
+        </form>
+        <br>
+        <br>
+        <form action="/view-cart" method="get">
+            <button type="submit">Cart</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

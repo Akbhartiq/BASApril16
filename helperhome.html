@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           
+.full {
+    width: 1144px;
+    height: 10000px; /* Set height to 100% to fill the parent container */
+    /* background-image: url("./Untitled-1.png"); */
+    background-size: cover; /* Ensures the background image covers the entire element */
+}
+#bod{
+    display: flex;
+    background-image: url("./Untitled-2.png");
+    background-size: cover; 
+    width:1144px;
+    height: 400px;
+   
+}
+.navbar
+{  display: flex;
+     width:1144px ;
+     height: 50px;
+      backdrop-filter: blur(10px);
+     justify-content: space-around;
+     align-items: center;
+
+}
+.icon
+{  
+    width:50px ;
+    height: 50px;
+    margin-left: 186px;
+    box-sizing: border-box;
+    background-color: brown;
+    filter: brightness(70%); 
+
+}
+
+.sign
+{    box-sizing: border-box; 
+    width: 10%;
+}
+
+.nav1
+{
+    width: 50%; 
+    text-align: center;
+}
+.child
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+
+.childmov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.cbox
+{
+    width:200px;
+    height:200px;
+    background-color: brown;
+}
+.cbox1
+{
+    width:200px;
+    height:40px;
+    background-color: brown;
+}
+.thriller
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+.thrilmov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.frictional
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+.frictmov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.mystery
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+.mymov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+    </style>
+</head>
+<body>
+    <div class="full" >
+          <div id="bod">
+              <div class="navbar"> 
+                <div class="icon">
+                </div>
+                <div class="nav1">
+                    <h1><b>welcome</b></h1>
+                </div>
+               <% if (locals.create) { %>
+                  <div class="sign">
+                      <b><%= locals.create %></b>
+                  </div>
+             <% } else { %>
+                  <div class="sign">
+                      <b><a href="/signin">Signin</a></b>
+                  </div>
+                  <div class="sign">
+                      <b><a href="/signup">Signup</a></b>
+                  </div>
+              <% } %> 
+              </div>
+         </div>
+        <div class="thriller">
+          <h1> thriller</h1>
+         </div>
+         <div class="thrilmov">
+           <div class="cbox"  id="c1">
+
+           </div>
+           <div class="cbox" id="c2">
+             
+           </div>
+           <div class="cbox" id="c3">
+             
+           </div>
+           <div class="cbox" id="c4">
+             
+           </div>
+           <div class="cbox" id="c5">
+         </div>   
+     </div>
+     <br/>
+             <div class="childmov">
+                <div class="cbox1"  id="c1">
+                </div>
+                <div class="cbox1" id="c2">
+                  
+                </div>
+                <div class="cbox1" id="c3">
+                  
+                </div>
+                <div class="cbox1" id="c4">
+                  
+                </div>
+                <div class="cbox1" id="c5">
+              </div>
+        </div> 
+    </div>             
+                           
+    </body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <% for (let i = 0; i < list.length; i++) { %>
+        <div class="child">
+            <h1 style="margin: 0;"><%= list[i] %></h1>
+        </div>  
+        <div class="childmov"></div>    
+        <% for (let j = 0; j < 5; j++) { %>
+            <div class="cbox" id="c2">
+                <% let test = result[i][j].image_url_l %>
+                <img src="<%= test %>">
+            </div>
+        <% } %>
+        </div>
+    <br>
+    <div class="childmov">
+        <% for (let k = 0; k < 5; k++) { %>
+            <div class="cbox1">
+            </div>
+        <% } %>
+    </div> 
+<% } %> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="cbox" id="c<%= j %>" style="width: 200px; height: 200px;">
+    <% let test = (locals.result)[i][j-1].get("image_url_l") %>
+    <img src="<%= test %>" alt="Image not found" style="max-width: 100%; max-height: 100%; display: block; margin: auto;">
+</div>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-left: 0;
+            background-color: #f5f5f5;
+            background-image: url("https://images.unsplash.com/photo-1513001900722-370f803f498d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: 40%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .book-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .book-details {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .book-image {
+            max-width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            display: block;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+
+        .book-title-container {
+            background-color: #46b4fd;
+            margin-left: 10%;
+            margin-right: 10%;
+
+        }
+
+        .book-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .book-info {
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .book-isbn {
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .book-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .book-count-wrapper {
+            margin-top: 25px;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+            margin-left: 500px;
+            margin-right: 500px;
+            cursor: pointer;
+            border-width: 100x;
+            background-color: #46b4fd;
+        }
+
+        .submit-button {
+            background-color: #46b4fd;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+            width: 150px;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .book-count {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+
+    <div class="book-count-wrapper">
+        <div class="book-count">
+            <%= books.length %> Books Found
+        </div>
+    </div>
+    <div class="container">
+        <% books.forEach((book, index)=> { %>
+            <div class="book-card" data-title="<%= book.get("title") %>"
+                data-author="<%= book.get("author") %>"
+                    data-price="<%= book.get("price") %>"
+                        data-isbn="<%= book.get("ISBN") %>"
+                        data-freq="<%=book.get("frequency")%>">
+                            <div class="book-details">
+                                <div class="book-title-container">
+                                    <h2 class="book-title">
+                                        <%= book.get("title") %>
+                                    </h2>
+                                </div>
+                                <p class="book-info"><b>Author:</b>
+                                    <%= book.get("author") %>
+                                </p>
+                                <p class="book-info"><b>Publication Date:</b>
+                                    <%= book.get("publication_date") %>
+                                </p>
+                                <p class="book-isbn"><b>ISBN:</b>
+                                    <%= book.get("ISBN") %>
+                                </p>
+                                <p class="book-info"><b>Genre:</b>
+                                    <%= book.get("genre") %>
+                                </p>
+                                <p class="book-info"><b>Copies Available:</b>
+                                    <%= book.get("frequency") %>
+                                </p>
+                                <p class="book-info">
+                                    <b>Location:
+                                        <%=book.get("location_id")%>
+                                    </b>
+                                </p>
+                                <p class="book-price">₹<%= book.get("price") %>/-</p>
+
+                                <form id="orderForm" onsubmit="submitForm(event)">
+                                    <input type="hidden" id="titleInput" name="title">
+                                    <input type="hidden" id="authorInput" name="author">
+                                    <input type="hidden" id="priceInput" name="price">
+                                    <input type="hidden" id="isbnInput" name="isbn">
+                                    <input type="hidden" id="copiesAvalable" name="freq" value="<%= book.get("frequency")%>">
+                                    <button type="submit" class="submit-button">Purchase</button>
+                                </form>
+
+                                <form action="/add-to-cart" method="get">
+                                    <input type="hidden" name="tittle" value="<%= book.get("title") %>">
+                                    <!-- Other form inputs go here -->
+                                    <button type="submit" class="submit-button">Add to Cart</button>
+                                </form>
+                            </div>
+            </div>
+            <% if ((index + 1) % 2===0) { %>
+                <div style="width: 100%;"></div>
+                <% } %>
+                    <% }) %>
+
+    </div>
+    <script>
+
+        async function parseLocation(location_id) {
+            let response_str = "Hall";
+            switch (location_id.substring(0, 2)) {
+                case "CS":
+                    response_str += " computer science\n ";
+                    break;
+                case "HI":
+                    response_str += " History\n ";
+                case "HL":
+                    response_str += " Health\n ";
+                case "FI":
+                    response_str += " fictional\n ";
+                case "TH":
+                    response_str += " Thriller\n ";
+                case "MY":
+                    response_str += " Mystery\n ";
+            }
+            response_str += "Row: " + location_id.substring(3, 4) + "\n";
+            response_str += "Col: " + location_id.substring(5, 6) + "\n";
+            response_str += "section: " + location_id.substring(7, 8) + "\n";
+            response_str += "Number: " + location_id.substring(9, 10) + "\n";
+            return response_str;
+
+        }
+        async function openPurchaseDialog() {
+            // Get the number of books the user wants to purchase
+            const numberOfBooksStr = prompt("How many books do you want to purchase?", "1");
+
+            // If the user clicks Cancel or doesn't enter a value, return null
+            if (numberOfBooksStr === null || numberOfBooksStr.trim() === "") {
+                return null;
+            }
+
+            // Convert the string to an integer
+            const numberOfBooks = parseInt(numberOfBooksStr);
+
+            // If the entered value is not a valid number, return null
+            if (isNaN(numberOfBooks)) {
+                return null;
+            }
+
+            // Show a confirmation dialog
+            const confirmation = confirm(`You are about to purchase ${numberOfBooks} book(s). Are you sure?`);
+
+
+            // If the user clicks OK, return the number of books
+            if (confirmation) {
+                return numberOfBooks;
+            } else {
+                return null; // User canceled the confirmation
+            }
+        }
+
+
+
+        async function submitForm(event) {
+            console.log("April7");
+            const count = await openPurchaseDialog();
+            //let's check if the count is more than stock
+            console.log("Let's print the count!");
+            console.log(count);
+            event.preventDefault();
+            const bookCard = event.target.closest('.book-card');
+            console.log(bookCard.dataset.freq, "iamfreq");
+            if (count > parseInt(bookCard.dataset.freq)) {
+                // Display a message at the top of the website
+                const errorMessage = document.createElement('div');
+                errorMessage.classList.add('alert', 'alert-danger');
+                errorMessage.textContent = "We don't have those many copies, if you wish you can request more copies!";
+                document.body.insertBefore(errorMessage, document.body.firstChild);
+                return; // Exit from the function
+            }
+
+            console.log(`BookCard is ${bookCard}`);
+            console.log(`Dataset is ${bookCard.dataset}`);
+            const title = bookCard.dataset.title;
+            console.log(`Title is ${title}`);
+            const author = bookCard.dataset.author;
+            console.log(`Title is ${author}`);
+            const price = bookCard.dataset.price;
+            console.log(`Title is ${price}`);
+            const isbn = bookCard.dataset.isbn;
+            console.log(`Title is ${isbn}`);
+            console.log(`At the first step!`);
+            console.log(`Title is ${title}`);
+            console.log('At the second step!');
+            document.getElementById('titleInput').value = title;
+            console.log(`Let's see the ${document.getElementById('titleInput')}`);
+            document.getElementById('authorInput').value = author;
+            document.getElementById('priceInput').value = price;
+            document.getElementById('isbnInput').value = isbn;
+            const body = JSON.stringify({
+                title: title,
+                author: author,
+                price: price,
+                isbn: isbn,
+                count: count,
+            });
+
+            try {
+                const url = `/save_to_currordered_books?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&price=${encodeURIComponent(price)}&isbn=${encodeURIComponent(isbn)}&count=${encodeURIComponent(count)}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    // Construct the URL with query parameters
+                    const receiptUrl = `/get_receipt?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&price=${encodeURIComponent(price)}&isbn=${encodeURIComponent(isbn)}&count=${encodeURIComponent(count)}`;
+                    // Navigate to the receipt page with the constructed URL
+                    window.location.href = receiptUrl;
+                } else {
+                    console.error('Failed to save data to currordered_books');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           
+.full {
+    width: 1144px;
+    height: 10000px; /* Set height to 100% to fill the parent container */
+    /* background-image: url("./Untitled-1.png"); */
+    background-size: cover; /* Ensures the background image covers the entire element */
+}
+#bod{
+    display: flex;
+    background-image: url("./Untitled-2.png");
+    background-size: cover; 
+    width:1144px;
+    height: 400px;
+   
+}
+.navbar
+{  display: flex;
+     width:1144px ;
+     height: 50px;
+      backdrop-filter: blur(10px);
+     justify-content: space-around;
+     align-items: center;
+
+}
+.icon
+{  
+    width:50px ;
+    height: 50px;
+    margin-left: 186px;
+    box-sizing: border-box;
+    background-color: brown;
+    filter: brightness(70%); 
+
+}
+
+.sign
+{    box-sizing: border-box; 
+    width: 10%;
+}
+
+.nav1
+{
+    width: 50%; 
+    text-align: center;
+}
+
+.thriller
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+.thrilmov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.frictional
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+.frictmov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.mystery
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+.mymov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+    </style>
+</head>
+<body>
+    <div class="full" >
+          <div id="bod">
+              <div class="navbar"> 
+                <div class="icon">
+                </div>
+                <div class="nav1">
+                    <h1><b>welcome</b></h1>
+                </div>
+               <% if (locals.create) { %>
+                  <div class="sign">
+                      <b><%= locals.create %></b>
+                  </div>
+             <% } else { %>
+                  <div class="sign">
+                      <b><a href="/signin">Signin</a></b>
+                  </div>
+                  <div class="sign">
+                      <b><a href="/signup">Signup</a></b>
+                  </div>
+              <% } %> 
+              </div>
+         </div>
+
+         <div class="books" style="display: flex; flex-direction: column;">
+            <div class="child" style="padding-left: 10px; margin: 20px;">
+                <h1 style="margin: 0;">childrens</h1>
+            </div>
+            <div class="childmov" style="display: flex; align-items: center; justify-content: space-around;">
+                <div class="cbox" id="c1" style="width: 200px; height: 200px; background-color: brown; background-image: url('https://imgs.search.brave.com/QnDMfEtwhyk1jGwiLo7Na7QMh1oTKwBLrRQVN2bIHcI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL3ZhZGVyLXBy/b2QuczMuYW1hem9u/YXdzLmNvbS8xNTU2/Mjg4NTU2LXNodXR0/ZXJmbHktYmVzdC1w/aG90by1ib29rLW1h/a2Vycy0xNTU2Mjg4/NDc3LnBuZz9jcm9w/PTAuOTg1eHc6MC45/ODV4aDswLjAxNDd4/dywwJnJlc2l6ZT05/ODA6Kg'); background-size: cover; border: 4px solid lime;"></div>
+                <div class="cbox" id="c2" style="width: 200px; height: 200px; background-color: brown; background-image: url('your_image_link_here'); background-size: cover; border: 4px solid lime;"></div>
+                <div class="cbox" id="c3" style="width: 200px; height: 200px; background-color: brown; background-image: url('your_image_link_here'); background-size: cover; border: 4px solid lime;"></div>
+                <div class="cbox" id="c4" style="width: 200px; height: 200px; background-color: brown; background-image: url('your_image_link_here'); background-size: cover; border: 4px solid lime;"></div>
+                <div class="cbox" id="c5" style="width: 200px; height: 200px; background-color: brown; background-image: url('your_image_link_here'); background-size: cover; border: 4px solid lime;"></div>
+            </div>
+            
+            
+            <br>
+            <div class="childmov" style="display: flex; align-items: center; justify-content: space-around;">
+                <div class="cbox1" id="c1" style="width: 200px; height: 40px; border: 4px solid lime;"></div>
+                <div class="cbox1" id="c2" style="width: 200px; height: 40px; border: 4px solid lime;"></div>
+                <div class="cbox1" id="c3" style="width: 200px; height: 40px; border: 4px solid lime;"></div>
+                <div class="cbox1" id="c4" style="width: 200px; height: 40px; border: 4px solid lime;"></div>
+                <div class="cbox1" id="c5" style="width: 200px; height: 40px; border: 4px solid lime;"></div>
+            </div>
+            
+        </div>
+        
+            <% for (let genre of list) { %>
+                <% const result = books.filter(book => book.subject === genre); %>
+                <div class="books" style="display: flex; flex-direction: column;">
+                    <div class="child" style="padding-left: 10px; margin: 20px;">
+                        <h1 style="margin: 0;"><%= genre %></h1>
+                    </div>
+                <% for (let i = 0; i < Math.min(result.length, 6); i++) { %>
+                    <div class="cbox" id="c2" style="width: 200px; height: 200px; background-color: brown; background-image: url(<%= result[i].image_url_l %>); background-size: cover; border: 4px solid lime;">
+                    </div>
+                <% } %>
+            </div>
+            <br>
+            <div class="childmov" style="display: flex; align-items: center; justify-content: space-around;">
+                    <% const result = books.filter(book => book.subject === genre); %>
+                    <% for (let i = 0; i < Math.min(result.length, 6); i++) { %>
+                        <div class="cbox1" id="c5" style="width: 200px; height: 40px; border: 4px solid lime;">
+                            <b> <%= result[i].tittle %>   </b>
+                        </div>  
+                    <% } %>
+                <% } %>
+            </div>
+    </body>
+    </html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            z-index: -1;
+            background-image: url("./blue-cyan-minimalism-gradient-wallpaper-preview\ \(1\).jpg");
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 0;
+            /* Adjusted padding to 10px top and bottom, 0 left and right */
+            color: #fff;
+            /* Text color */
+            width: 100%;
+            /* Make the navbar full-width */
+            position: fixed;
+            /* Fix the navbar at the top */
+            top: 0;
+            /* Align navbar at the top */
+            z-index: 1000;
+            /* Ensure the navbar is on top */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+            margin-left: 10px;
+            /* Center-align the navbar items */
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+
+        .login-container {
+            background-color: rgba(0, 0, 0, 0);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 325px;
+        }
+
+        .login-container h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 0, 0, 0);
+            /* Adjust opacity on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: -webkit-fill-available;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .error h1 {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li style="float: right;"><a href="/login">Existing User</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <% if (locals.same==="ok" ) { %>
+        <div class="error">
+            <h1>This mail id already Exits</h1>
+        </div>
+        <% } %>
+            <div class="login-container">
+                <h2>Sign Up</h2>
+                <form action="/signup" method="POST">
+                    <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Gmail:</label>
+                        <input type="email" id="email" name="gmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phonenumber">Phone Number:</label>
+                        <input type="tel" id="phonenumber" name="phonenumber" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group password-toggle">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" oninput="checkPasswordStrength()" required>
+                        <span class="toggle-password" onclick="togglePasswordVisibility(this)">👁️</span>
+                        <div id="password_strength_error" style="color: red;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" id="confirm_password" name="confirm_password"
+                            oninput="validatePassword()" required>
+                        <div id="password_match_error" style="color: red;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <textarea id="address" name="address" rows="4" style="width:93.4%" required></textarea>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+
+                <script>
+                    function togglePasswordVisibility(element) {
+                        var passwordInput = document.getElementById("password");
+                        if (passwordInput.type === "password") {
+                            passwordInput.type = "text";
+                            element.textContent = "👁️";
+                        } else {
+                            passwordInput.type = "password";
+                            element.textContent = "👁️";
+                        }
+                    }
+                    function checkPasswordStrength() {
+                        var password = document.getElementById("password").value;
+                        var errorDiv = document.getElementById("password_strength_error");
+                        var uppercaseRegex = /[A-Z]/;
+                        var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+                        if (password.length < 8) {
+                            errorDiv.textContent = "Password must be at least 8 characters long";
+                        } else if (!uppercaseRegex.test(password)) {
+                            errorDiv.textContent = "Password must contain at least one uppercase letter";
+                        } else if (!symbolRegex.test(password)) {
+                            errorDiv.textContent = "Password must contain at least one symbol";
+                        } else {
+                            errorDiv.textContent = "";
+                        }
+                    }
+                    function validatePassword() {
+                        var password = document.getElementById("password").value;
+                        var confirmPassword = document.getElementById("confirm_password").value;
+                        var errorDiv = document.getElementById("password_match_error");
+
+                        if (password !== confirmPassword) {
+                            errorDiv.textContent = "Passwords do not match";
+                        } else {
+                            errorDiv.textContent = "";
+                        }
+                    }
+                </script>
+
+</body>
+
+</html>

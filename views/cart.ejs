@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        /* Copy the CSS styles from the first script */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Book container and card styles */
+        .books-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .book-card {
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .book-card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        /* Details styles */
+        .details {
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        p {
+            margin: 0;
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* Action buttons styles */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+        }
+
+        .ignore-button,
+        .search-button,
+        .order-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .ignore-button {
+            background-color: #ff6666;
+            color: #fff;
+        }
+
+        .ignore-button:hover {
+            background-color: #e63939;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .order-button {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .order-button:hover {
+            background-color: #218838;
+        }
+
+        /* Add a specific style for the action buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        /* Add a specific style for the action buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+        }
+
+        /* Dialogue box styles */
+        .dialog-box {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        /* Dialogue box input and button styles */
+        .dialog-box input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .dialog-box button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .dialog-box button:hover {
+            background-color: #218838;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            background-color: #333;
+            padding: 10px 20px;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Submit button styles */
+        .submit-button {
+            background-color: #46b4fd;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+            width: 150px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Container -->
+    <div class="container">
+        <h1>Cart</h1>
+        <div class="books-container">
+            <!-- For each book in the list of books -->
+            <% books.forEach((book, index) => { %>
+                <div class="book-card" id="book<%= index %>">
+                    <div class="details">
+                        <h2><%= book.title %></h2>
+                        <p>Author: <%= book.author %></p>
+                        <p>Price: ₹<%= book.price %>/-</p>
+                        <p>ISBN: <%= book.ISBN %></p>
+                    </div>
+                    <div class="action-buttons">
+                        <!-- Form for purchasing a single book -->
+                        <form action="/singlebook-cart" method="get">
+                            <input type="hidden" name="title" value="<%= book.title %>">
+                            <button type="submit" class="submit-button">Purchase</button>
+                        </form>
+                        
+                        <!-- Form for removing a book from the cart -->
+                        <form action="/remove-from-cart" method="get">
+                            <input type="hidden" name="title" value="<%= book.title %>">
+                            <button type="submit" class="submit-button">Remove from Cart</button>
+                        </form>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- JavaScript code can be added here -->
+
+</body>
+
+</html>
+

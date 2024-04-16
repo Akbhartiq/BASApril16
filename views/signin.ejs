@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            z-index: -1;
+            background-image: url("./blue-cyan-minimalism-gradient-wallpaper-preview\ \(1\).jpg");
+        }
+
+        .login-container {
+            background-color: rgba(0, 0, 0, 0);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 325px;
+            margin-top: 30px;
+        }
+
+
+
+        .login-container h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 0, 0, 0);
+            /* Adjust opacity on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: -webkit-fill-available;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .error h1 {
+            color: red;
+        }
+
+        .newcont {
+            text-align: center;
+        }
+
+        .signup-form button {
+
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signup-form button:hover {
+            background-color: #0056b3;
+        }
+/* Container */
+.forget {
+    padding: 20px;
+    border: 1px solid #ccc; /* Border around the container */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light gray background */
+    max-width: 400px; /* Limit the width of the container */
+    margin: 0 auto; /* Center the container */
+    text-align: center; /* Center-align the text */
+}
+
+/* Heading */
+.forget h3 {
+    font-size: 24px; /* Larger font size for the heading */
+    color: #333; /* Darker text color */
+    margin-bottom: 20px; /* Space between the heading and form */
+}
+
+/* Form */
+.forget form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    align-items: center; /* Center-align form elements */
+}
+
+/* Button */
+.forget button {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding to the button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Show a pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition effect */
+    width: 50%; /* Button width */
+}
+
+/* Button hover effect */
+.forget button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            /* Ensure the nav bar is above other content */
+
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <% if (locals.same==="ok" ) { %>
+        <div class="error">
+            <h1>Incorrect Email</h1>
+        </div>
+        <% } %>
+            <% if (locals.same==="no" ) { %>
+                <div class="error">
+                    <h1>Incorrect password</h1>
+                </div>
+                <% } %>
+                    <div class="login-container">
+                        <h2>Sign In</h2>
+                        <form action="/invokesign" method="get">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="gmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <button type="submit">Login</button>
+                        </form>
+
+
+                    </div>
+                    <div class="newcont">
+                        <h3>New User?</h3>
+
+                        <form class="signup-form" action="/signup" method="get">
+                            <!-- Add your form elements here if needed -->
+                            <button type="submit" style="width:30%">Signup</button>
+                            
+                            
+                    </form>
+                    </div>
+                    <!-- <div class="forget">
+                        <h3>Forgot password?</h3>
+                            <form class="forget" action="/forget-password" method="post">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="gmail" required>
+                                </div>
+                                <button type="submit">Forget Password</button>
+                            </form>
+                    </div> -->
+                    </div>
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last 10 Days Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+            /* Hide horizontal scrollbar */
+        }
+
+        .total-revenue {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: right;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .scrollable-table {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body> <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Last 10 Days Statistics</h1>
+
+        <div class="scrollable-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Books Sold</th>
+                        <th>Who Sold</th>
+                        <th>Buyer</th>
+                        <th>Price</th>
+                        <th>Number of Copies</th>
+                        <th>Total Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let totalRevenue=0; %>
+                        <% soldbooks.forEach(book=> { %>
+                            <tr>
+                                <td>
+                                    <%= book.currdate %>
+                                </td>
+                                <td>
+                                    <%= book.title %>
+                                </td>
+                                <td>
+                                    <%= book.details.Seller %>
+                                </td>
+                                <td>
+                                    <%=book.details.Buyer%>
+                                </td>
+                                <td>$<%= book.price %>
+                                </td>
+                                <td>
+                                    <%= book.frequency %>
+                                </td>
+                                <td>$<%= book.price * book.frequency %>
+                                </td>
+                            </tr>
+                            <% totalRevenue +=book.price * book.frequency; %>
+                                <% }); %>
+                </tbody>
+            </table>
+            <div class="total-revenue">Total Revenue: $<%= totalRevenue.toFixed(2) %>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

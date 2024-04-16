@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="full">
+        <div id="bod"></div>
+        <div class="navbar">
+            <h1><b><%= locals.subject %></b></h1>  
+        </div>
+        <div class="books">
+            <% let list = Math.ceil(locals.result.length / 5); %>
+            <% for (let i = 0; i < list; i++) { %>
+                <div class="childmov">
+                    <% for (let j = 0; j < 5; j++) { %>
+                        <% let index = (i * 5) + j; %>
+                        <% if (index < locals.result.length) { %>
+                            <% let test = locals.result[index].get("image_url_l"); %>
+                            <div class="cbox" id="c<%= index %>"></div>
+                        <% } %>
+                    <% } %>
+                </div>
+                <br/>
+                <div class="childmov">
+                    <% for (let k = 0; k < 5; k++) { %>
+                        <% let index = (i * 5) + k; %>
+                        <% if (index < locals.result.length) { %>
+                            <div class="cbox1" id="c<%= index %>">
+                                <b><%= locals.result[index].get("title") %></b>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

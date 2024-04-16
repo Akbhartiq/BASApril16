@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .full {
+            width: 100%;
+            height: 1000px;
+            /* Set height to 100% to fill the parent container */
+            /* background-image: url("./Untitled-1.png"); */
+            background-size: cover;
+            /* Ensures the background image covers the entire element */
+        }
+
+        #bod {
+            display: block;
+            background-image: url("./herobookstore .png");
+            background-size: cover;
+            width: 100%;
+            height: 550px;
+            border-radius: 15px;
+            /* Add drop-down shadow */
+            box-shadow: 0px 10px 15px rgba(0.1, 0.1, 0.1, 0.5);
+            /* Adjust values as needed */
+
+            margin-right: 20px;
+        }
+
+
+        .navbar {
+            display: flex;
+            width: 100%;
+            height: 50px;
+
+            justify-content: space-around;
+            align-items: center;
+        }
+
+
+
+
+
+        .email {
+            box-sizing: border-box;
+            width: 10%;
+            margin-right: 100px;
+        }
+
+        .nav1 {
+            width: 50%;
+            text-align: center;
+        }
+
+        .child {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .childmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .cbox {
+            width: 200px;
+            height: 200px;
+            /* background-color: brown; */
+            border-style: solid;
+            border-color: #7ca2e8;
+            border-width: 5px;
+        }
+
+        .cbox1 {
+            width: 200px;
+            height: 40px;
+            /* background-color: brown; */
+            border-style: solid;
+            border-color: #7ca2e8;
+            border-width: 5px;
+            overflow: auto;
+            text-align: center;
+            display: flex;
+            /* Align content with flexbox */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+        }
+
+        .thriller {
+            padding: 20px;
+            margin: 20px;
+            background-color: #f0f0f0;
+            /* Light gray background color */
+            border-radius: 8px;
+            /* Rounded corners */
+        }
+
+        .thriller h1 {
+            margin-bottom: 10px;
+            /* Add some space below the heading */
+        }
+
+        .thriller a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #7ca2e8;
+            /* Light blue background color */
+            color: #fff;
+            /* White text color */
+            text-decoration: none;
+            /* Remove underlines from links */
+            border-radius: 5px;
+            /* Rounded corners */
+            transition: background-color 0.3s ease;
+            /* Smooth transition on hover */
+        }
+
+        .thriller a:hover {
+            background-color: #5c88d0;
+            /* Darker blue color on hover */
+        }
+
+
+        .thrilmov {
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .frictional {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .frictmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .mystery {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .mymov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-wrapper {
+            background-color: #7ca2e8;
+            /* Set your desired background color */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .search-form {
+            display: flex;
+            width: 100%;
+            /* Adjust as needed */
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            margin-right: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 260px;
+        }
+
+        .search-select {
+            width: 150px;
+            /* Adjust as needed */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #cd2326;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .sign {
+            display: inline-block;
+            margin: 0 10px;
+            color: black;
+            margin-top: 15px;
+        }
+
+        .sign a {
+            display: block;
+            padding: 10px;
+            background-color: #588cee;
+            color: #131313;
+            text-decoration: none;
+            text-align: center;
+            font-size: larger;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 80px;
+
+        }
+
+        .sign a:hover {
+            background-color: #5c88d0;
+        }
+
+        .thrilmov {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow items to wrap to the next line */
+            justify-content: space-around;
+            margin-bottom: 20px;
+            /* Add some bottom margin */
+        }
+
+        .childmov {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow items to wrap to the next line */
+            justify-content: space-around;
+        }
+
+        .cbox,
+        .cbox1 {
+            width: calc(20% - 20px);
+            /* Set width for each item (20% - margin) */
+            margin-bottom: 20px;
+            /* Add some bottom margin */
+            background-color: #f0f0f0;
+            /* Light gray background color */
+            border-radius: 8px;
+            /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Add shadow for depth */
+        }
+
+        .cbox img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensure images cover the entire box */
+        }
+
+        .cbox1 a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .linktopage {
+            border: none;
+        }
+
+        /*Finishing  the styling of the search box*/
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+
+        
+        .right {
+            
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+            <% if(locals.type=="e" || locals.type=="o" ){%>
+                <li class="right"><a href="/logoutem">Logout</a></li>
+                <%}%>
+        </ul>
+    </nav>
+    <div class="full">
+        <div id="bod">
+            <div class="navbar">
+                <div class="icon"></div>
+                <div class="nav1">
+
+                </div>
+                <% if (locals.create) { %>
+                    <div class="email">
+                        <b> <a href="/individualspage">
+                                <%= locals.create %>
+                                    <%= console.log(locals.create)%>
+                            </a></b>
+                    </div>
+                    <% } else { %>
+                        <div class="sign">
+                            <b><a href="/login">Sign In</a></b>
+                        </div>
+                        <div class="sign">
+                            <b><a href="/signup">Sign Up</a></b>
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+        <!-- if the user is signed in , then show the search bar -->
+        <% if(locals.create){ %>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <form action="/search" method="GET" class="search-form">
+                        <!-- Search input with dropdown menu -->
+                        <div class="search-box">
+                            <input type="text" name="query" placeholder="Explore Books..." class="search-input" required>
+                            <select name="searchType" class="search-select">
+                                <option value="title">Search by Title</option>
+                                <option value="author">Search by Author</option>
+                            </select>
+                        </div>
+                        <!-- Submit button -->
+                        <button type="submit" class="search-button">Search</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <% } %>
+                <% for (let i=0; i < (locals.list).length; i++) { %>
+                    <div class="thriller">
+                        <h1>
+                            <%= list[i] %>
+                        </h1>
+                        <b><a href="\allbooks?subject=<%= list[i]%>">See All</a></b>
+                    </div>
+                    <div class="thrilmov">
+                        <% for (let j=1; j <=5; j++) { %>
+                            <% let test=(locals.result)[i][j-1].get("image_url_l") %>
+                                <div class="cbox" id="c1"
+                                    style="width:200px; height:200px; background-color:brown; background-image:url('<%= test %>'); background-size:100% 100%;background-position:center;">
+                                </div>
+                                <% } %>
+                    </div>
+                    <br />
+                    <div class="childmov">
+                        <% for (let k=1; k <=5; k++) { %>
+                            <div class="cbox1" id="c<%= k %>">
+                                <% const title=(locals.result)[i][k-1].get('title'); %>
+                                    <!-- <a href="/singlebook?book='<%= encodeURIComponent(title) %>'"><b>
+                                            <%= (locals.result)[i][k-1].get("title") %>
+                                        </b></a> -->
+                                    <form action="<%= locals.create ? '/bookpage' : '/login' %>" method="get">
+                                        <input type="hidden" id="title" value="<%= title %>" name="title">
+                                        <button type="submit" class="linktopage">
+                                            <%= title %>
+                                        </button>
+                                    </form>
+
+                            </div>
+                            <% } %>
+                    </div>
+                    <% } %>
+
+    </div>
+
+</body>
+
+</html>

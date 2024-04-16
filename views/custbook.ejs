@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #d2e4f0;
+            border-radius: 10px;
+            padding: 20px;
+            width: 50%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <h1>Your Orders</h1>
+
+    <div class="card-container">
+        <div class="card">
+            <h2>Ordered Books</h2>
+            <% if (customer.bookspurchased.length===0) { %>
+                <p>No ordered books.</p>
+                <% } else { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Count</th>
+                                <th>Total Price</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% customer.bookspurchased.forEach(book=> { %>
+                                <% if (!book.flag) { %>
+                                    <tr>
+                                        <td>
+                                            <%= book.title %>
+                                        </td>
+                                        <td>
+                                            <%= book.author %>
+                                        </td>
+                                        <td>
+                                            ₹<%= book.price %>
+                                        </td>
+                                        <td>
+                                            <%= book.copies %>
+                                        </td>
+                                        <td>
+                                            ₹<%= book.price * book.copies %>
+                                        </td>
+
+
+
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                        <% }); %>
+                        </tbody>
+                    </table>
+                    <% } %>
+        </div>
+
+        <div class="card">
+            <h2>Purchased Books</h2>
+            <% if (customer.bookspurchased.length===0) { %>
+                <p>No purchased books.</p>
+                <% } else { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Count</th>
+                                <th>Total Price</th>
+                                <th>Receipt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% customer.bookspurchased.forEach(book=> { %>
+                                <% if (book.flag && !book.receipt) { %>
+                                    <tr>
+                                        <td>
+                                            <%= book.title %>
+                                        </td>
+                                        <td>
+                                            <%= book.author %>
+                                        </td>
+                                        <td>
+                                            ₹<%= book.price %>
+                                        </td>
+                                        <td>
+                                            <%= book.copies %>
+                                        </td>
+                                        <td>
+                                            ₹<%= book.price * book.copies %>
+                                        </td>
+                                        <td>
+                                            <form action="/get_receipt" method="GET">
+                                                <input type="hidden" name="title"
+                                                    value="<%= encodeURIComponent(book.title) %>">
+                                                <input type="hidden" name="author"
+                                                    value="<%= encodeURIComponent(book.author) %>">
+                                                <input type="hidden" name="price"
+                                                    value="<%= encodeURIComponent(book.price) %>">
+                                                <input type="hidden" name="isbn"
+                                                    value="<%= encodeURIComponent(book.ISBN) %>">
+                                                <input type="hidden" name="count"
+                                                    value="<%= encodeURIComponent(book.copies) %>">
+                                                <button type="submit">Get Receipt</button>
+                                            </form>
+
+
+                                        </td>
+                                    </tr>
+                                    <% } else if(book.flag && book.receipt) { %>
+                                        <tr>
+                                            <td>
+                                                <%= book.title %>
+                                            </td>
+                                            <td>
+                                                <%= book.author %>
+                                            </td>
+                                            <td>
+                                                <%= book.price %>
+                                            </td>
+                                            <td>
+                                                <%= book.copies %>
+                                            </td>
+                                            <td>
+                                                <%= book.price * book.copies %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% }); %>
+                        </tbody>
+                    </table>
+                    <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

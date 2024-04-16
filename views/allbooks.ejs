@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .full {
+            width: 100%;
+            height: 20000px;
+            /* Set height to 100% to fill the parent container */
+            /* background-image: url("./Untitled-1.png"); */
+            background-size: cover;
+            /* Ensures the background image covers the entire element */
+        }
+
+        #bod {
+            display: block;
+            background-image: url("./herobookstore .png");
+            background-size: cover;
+            width: 100%;
+            height: 550px;
+            border-radius: 15px;
+            /* Add drop-down shadow */
+            box-shadow: 0px 10px 15px rgba(0.1, 0.1, 0.1, 0.5);
+            /* Adjust values as needed */
+
+            margin-right: 20px;
+        }
+
+
+        .navbar {
+            display: flex;
+            width: 1250px;
+            height: 50px;
+            backdrop-filter: blur(10px);
+            justify-content: space-around;
+            align-items: center;
+        }
+
+
+        .heading {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        /* Ensure the top image is completely visible */
+        .childmov {
+            align-items: flex-start;
+            /* Align items to the start of the flex container */
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            margin-left: 186px;
+            box-sizing: border-box;
+            background-color: brown;
+            filter: brightness(70%);
+        }
+
+        .sign {
+            box-sizing: border-box;
+            width: 10%;
+        }
+
+        .nav1 {
+            width: 50%;
+            text-align: center;
+        }
+
+        .child {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .childmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .cbox {
+            width: 200px;
+            height: 200px;
+            /* background-color: brown; */
+            border-style: solid;
+            border-color: rgb(118, 188, 215);
+            border-width: 5px;
+            border-radius: 10px;
+        }
+
+        .cbox1 {
+            width: 200px;
+            height: 40px;
+            /* background-color: brown; */
+            border-style: solid;
+            border-color: rgb(118, 188, 215);
+            border-width: 5px;
+            overflow: auto;
+            text-align: center;
+            display: flex;
+            /* Align content with flexbox */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            border-radius: 10px;
+        }
+
+        .thriller {
+            padding-left: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .thrilmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .frictional {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .frictmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .mystery {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .mymov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        button {
+            outline: none !important;
+            border: none;
+            background-color: white;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <div class="full">
+        <div id="bod"></div>
+
+        <!-- Heading of the images -->
+        <div class="navbar heading">
+            <h1><b>
+                    <%= locals.subject %>
+                </b></h1>
+        </div>  
+
+        <div class="books">
+            <% let list=Math.ceil(locals.result.length / 5); %>
+                <% for (let i=0; i < list; i++) { %>
+                    <div class="card">
+                        <div class="childmov">
+                            <% for (let j=0; j < 5; j++) { %>
+                                <% let index=(i * 5) + j; %>
+                                    <% if (index < locals.result.length) { %>
+                                        <% let test=locals.result[index].get("image_url_l"); %>
+                                            <div class="cbox" id="c1"
+                                                style="width:200px; height:200px; background-color:brown; background-image:url('<%= test %>'); background-size:100% 100%;background-position:center;">
+                                            </div>
+                                            <% } %>
+                                                <% } %>
+                        </div>
+                        <br />
+                        <div class="childmov">
+                            <% for (let k=0; k < 5; k++) { %>
+                                <% let index=(i * 5) + k; %>
+                                    <% if (index < locals.result.length) { %>
+                                        <div class="cbox1" id="c<%= index %>">
+                                            <% const title=locals.result[index].get('title'); %>
+                                                <form action="<%= locals.create ? '/bookpage' : '/login' %>" method="get">
+                                                    <input type="hidden" id="title" value="<%= title %>" name="title">
+                                                    <button type="submit" class="linktopage">
+                                                        <%= title %>
+                                                    </button>
+                                                </form>
+                                        </div>
+                                        <% } %>
+                                            <% } %>
+                        </div>
+                    </div>
+                    <br>
+                    <% } %>
+
+        </div>
+    </div>
+</body>
+
+</html>

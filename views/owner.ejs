@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            z-index: -1;
+            background-image: url("./blue-cyan-minimalism-gradient-wallpaper-preview\ \(1\).jpg");
+
+        }
+
+
+
+        /* Container styling */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Center align all items horizontally */
+        }
+
+        /* Header styling */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #e1e2e6;
+            border-radius: 0.5cm;
+            background-color: #2f52ff;
+            padding: 10px 10px 0px 10px;
+            width: 16cm;
+        }
+
+        .header h1 {
+            margin-top: 0.2cm;
+            color: white;
+        }
+
+        /* Flex container styling */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 1.2cm;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        .card h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .card form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card form input[type="text"],
+        .card form input[type="email"],
+        .card form input[type="password"],
+        .card form input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .card form button {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Card styling */
+
+        .card h2 {
+            color: rgb(255, 255, 255);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Card styles */
+        .card {
+            width: 14cm;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 0, 0, 0);
+            /* Adjust opacity on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            /* Adjust box shadow on hover */
+        }
+
+        /* Form styling */
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /*Alert styling*/
+        .alert {
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert-info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+
+        /* Center align form */
+        .center-align {
+            text-align: center;
+        }
+
+        /* Card styles for Select Inspection Type */
+        .card.center-align {
+            background-color: rgba(0, 0, 0, 0);
+            /* Set the background color with opacity */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card.center-align:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 0, 0, 0);
+            /* Adjust opacity on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            /* Adjust box shadow on hover */
+        }
+
+        .card.center-align h2 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .card.center-align form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card.center-align form label {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .card.center-align form input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .card.center-align form button {
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card.center-align form button:hover {
+            background-color: #0056b3;
+        }
+
+
+        /* Button container */
+        .button-container {
+            display: grid;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        /* Button styling */
+        .button-container button {
+
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.3cm;
+            width: 10cm;
+
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+            /* Change background color on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Change shadow effect on hover */
+        }
+
+        label {
+            color: rgb(255, 255, 255);
+            font-size: xx-large;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <% if (message) { %>
+        <div class="alert" id="alertMessage">
+            <%= message %>
+        </div>
+
+        <% } %>
+            <div class="container">
+                <div class="header">
+                    <h1>Owner Dashboard</h1>
+                </div>
+                <div class="dashboard">
+
+                    <!-- Section for requested books -->
+                    <div class="card" style="background-image: url('');">
+                        <h2>Requested Books</h2>
+                        <form class="form" action="/view-requested-books" method="GET">
+                            <button type="submit">View Requested Books</button>
+                        </form>
+                    </div>
+                    <!-- Section for employee management -->
+                    <div class="card" style="background-image: url('');">
+                        <h2>Employee Management</h2>
+                        <form class="form" action="/add-employee" method="POST">
+                            <input type="text" id="fullname" name="fullname" placeholder="Employee Fullname" required>
+                            <input type="email" id="gmail" name="email" placeholder="Employee Email" required>
+                            <input type="password" id="password" name="password" placeholder="Employee Password"
+                                oninput="checkPasswordStrength()" required>
+                            <div id="password_strength_error" style="color: red;"></div>
+                            <input type="password" id="confirm_password" name="confirm_password"
+                                placeholder="Confirm  Password" oninput="validatePassword()" required>
+                            <div id="password_match_error" style="color: red;"></div>
+                            <input type="text" name="phonenumber" id="phonenumber" placeholder="Employee Phonenumber"
+                                pattern="[0-9]{10}" required>
+                            <input type="text" name="address" id="address" placeholder="Employee Address" required>
+                            <input type="text" name="salary" id="salary" placeholder="Employee Salary" required>
+                            <button type="submit">Add Employee</button>
+                        </form>
+                        <form class="form" action="/remove-employee" method="POST">
+                            <input type="email" name="email" placeholder="Employee Email" required>
+                            <button type="submit">Remove Employee</button>
+                        </form>
+                    </div>
+                    <!-- Section for business data -->
+                    <div class="card" style="background-image: url('')">
+                        <h2>Business Data</h2>
+                        <form class="form" action="/view-business-data" method="get" onsubmit="return validateForm()">
+                            <!-- Inputs for year, month, and date -->
+                            <input type="number" id="year" name="year" placeholder="Year" />
+                            <input type="number" id="month" name="month" placeholder="Month" />
+                            <input type="number" id="date" name="date" placeholder="Date" />
+
+                            <!-- Submit button -->
+                            <button type="submit">View Business Data</button>
+                        </form>
+                        <h2>Business Data of employee</h2>
+                        <form class="form" action="/view-business-data-employee" method="get"
+                            onsubmit="return validateForm1()">
+                            <!-- Inputs for year, month, and date -->
+                            <input type="email" id="gmail" name="gmail" placeholder="Employee Email" required>
+                            <input type="number" id="emp_year" name="year" placeholder="Year" />
+                            <input type="number" id="emp_month" name="month" placeholder="Month" />
+                            <input type="number" id="emp_date" name="date" placeholder="Date" />
+                            <!-- Submit button -->
+                            <button type="submit">View Business Data of an Employee</button>
+                        </form>
+                        <h2>Business Data of Book</h2>
+                        <form class="form" action="/history-of-book" method="get" onsubmit="return validateForm2()">
+                            <!-- Inputs for year, month, and date -->
+                            <input type="text" id="employee_email" name="book" placeholder="Employee Email" required>
+                            <input type="number" id="employee_year" name="year" placeholder="Year" />
+                            <input type="number" id="employee_month" name="month" placeholder="Month" />
+                            <input type="number" id="employee_date" name="date" placeholder="Date" />
+                            <!-- Submit button -->
+                            <button type="submit">View Business Data of a Book</button>
+                        </form>
+
+                        <form class="form" action="/view-books-below-threshold" method="GET">
+                            <input type="number" name="threshold" placeholder="Threshold" required />
+                            <button type="submit">View Books Below Threshold</button>
+                        </form>
+                        <form class="form" action="/order-all-books-below-thresholds" method="post">
+                            <label for="quantityTobeAdded" style="float:right">Quantity to be Added:</label>
+                            <input type="number" id="quantityTobeAdded" name="quantityTobeAdded" placeholder="+?" required>
+                            
+                            <label for="threshold">Threshold:</label>
+                            <input type="number" id="threshold" name="threshold" placeholder="Threshold" required>
+                            
+                            <button type="submit">Order All Books Below Threshold</button>
+                        </form>
+                        
+                    </div>
+                    <!-- Section for book requests -->
+                    <div class="card" style="background-image: url('');">
+                        <h2>Order Books</h2>
+                        <form class="form" action="/order-book" method="post">
+                            <label for="titleInput">Title:</label>
+                            <input type="text" id="titleInput" name="titleInput" placeholder="Title" required>
+
+                            <label for="authorInput">Author:</label>
+                            <input type="text" id="authorInput" name="authorInput" placeholder="Author" required>
+
+                            <label for="isbnInput">ISBN:</label>
+                            <input type="text" id="isbnInput" name="isbnInput" placeholder="ISBN" required>
+
+                            <label for="subjectInput">Subject:</label>
+                            <input type="text" id="subjectInput" name="subjectInput" placeholder="Subject">
+
+                            <label for="imageLinkInput">Image Link:</label>
+                            <input type="text" id="imageLinkInput" name="imageLinkInput" placeholder="Image Link">
+
+                            <div class="pub-date">
+                                <label for="publicationDateInput">Publication Date:</label>
+                                <input type="date" id="publicationDateInput" name="publicationDateInput"
+                                    placeholder="Publication Date">
+                            </div>
+
+                            <label for="priceInput">Price:</label>
+                            <input type="number" id="priceInput" name="priceInput" placeholder="Price" required>
+
+                            <label for="copiesInput">Number of Copies:</label>
+                            <input type="number" id="copiesInput" name="copiesInput" placeholder="Number of Copies"
+                                required>
+
+                            <input type="submit" value="Add">
+                        </form>
+
+                    </div>
+                </div>
+                <!-- Section for selecting inspection type -->
+                <div class="card center-align" style="background-image:url('')">
+                    <h2>Select Inspection Type</h2>
+                    <!-- Form for inspecting employee -->
+                    <form class="form" action="/inspectem" method="GET">
+                        <div>
+                            <label for="employeeEmail">Employee Email:</label>
+                            <input type="email" id="employeeEmail" name="employee_email"
+                                placeholder="Enter Employee Email" required>
+                        </div>
+                        <button type="submit">Inspect Employee</button>
+                    </form>
+                    <!-- Form for inspecting customer -->
+                    <form class="form" action="/inspectcs" method="GET">
+                        <div>
+                            <label for="customerEmail">Customer Email:</label>
+                            <input type="email" id="customerEmail" name="customer_email"
+                                placeholder="Enter Customer Email" required>
+                        </div>
+                        <button type="submit">Inspect Customer</button>
+                    </form>
+                </div>
+
+
+                <!-- Button container for viewing last 10 days statistics and ordering all requested books -->
+                <div class="button-container">
+                    <!-- Button for viewing last 10 days statistics -->
+                    <form class="form" action="/view-last-10-days-stats" method="GET">
+                        <button type="submit">View Last 10 Days Statistics</button>
+                    </form>
+                    <!-- Button for ordering all requested books -->
+                    <form class="form" action="/order-all-books" method="POST">
+                        <button type="submit">Order All Requested Books</button>
+                    </form>
+                    <form action="/seeinventorybyowner" method="get">
+                        <button type="submit">See Inventory Of Books</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <script>
+                // Automatically remove the alert after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 500); // Adjust the time as needed (in milliseconds)
+
+                function validateForm() {
+                    var year = document.getElementById("year").value.trim();
+                    var month = document.getElementById("month").value.trim();
+                    var date = document.getElementById("date").value.trim();
+
+                    // Check if any field is empty
+                    if (year === "" && month === "" && date === "") {
+                        alert("Please enter at least one field.");
+                        return false;
+                    }
+
+                    // Check for invalid combinations
+                    if ((year === "" && month !== "") || (year === "" && date !== "") || (month === "" && date !== "")) {
+                        alert("Please provide complete date information.");
+                        return false;
+                    }
+
+                    // Check if year is between 2020 and 2024
+                    if (year !== "" && (parseInt(year) < 2020 || parseInt(year) > 2024)) {
+                        alert("Please enter a year between 2020 and 2024.");
+                        return false;
+                    }
+
+                    // Check if month is between 1 and 12
+                    if (month !== "" && (parseInt(month) < 1 || parseInt(month) > 12)) {
+                        alert("Please enter a month between 1 and 12.");
+                        return false;
+                    }
+
+                    // Check if date is between 1 and 31
+                    if (date !== "" && (parseInt(date) < 1 || parseInt(date) > 31)) {
+                        alert("Please enter a date between 1 and 31.");
+                        return false;
+                    }
+
+                    // Check if date is valid for the given month and year
+                    if (date !== "") {
+                        var maxDate = new Date(year, month, 0).getDate();
+                        if (parseInt(date) < 1 || parseInt(date) > maxDate) {
+                            alert("Please enter a valid date for the given month and year.");
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+                function validateForm1() {
+                    var year = document.getElementById("emp_year").value.trim();
+                    var month = document.getElementById("emp_month").value.trim();
+                    var date = document.getElementById("emp_date").value.trim();
+
+                    // Check if any field is empty
+                    if (year === "" && month === "" && date === "") {
+                        alert("Please enter at least one field.");
+                        return false;
+                    }
+
+                    // Check for invalid combinations
+                    if ((year === "" && month !== "") || (year === "" && date !== "") || (month === "" && date !== "")) {
+                        alert("Please provide complete date information.");
+                        return false;
+                    }
+
+                    // Check if year is between 2020 and 2024
+                    if (year !== "" && (parseInt(year) < 2020 || parseInt(year) > 2024)) {
+                        alert("Please enter a year between 2020 and 2024.");
+                        return false;
+                    }
+
+                    // Check if month is between 1 and 12
+                    if (month !== "" && (parseInt(month) < 1 || parseInt(month) > 12)) {
+                        alert("Please enter a month between 1 and 12.");
+                        return false;
+                    }
+
+                    // Check if date is between 1 and 31
+                    if (date !== "" && (parseInt(date) < 1 || parseInt(date) > 31)) {
+                        alert("Please enter a date between 1 and 31.");
+                        return false;
+                    }
+
+                    // Check if date is valid for the given month and year
+                    if (date !== "") {
+                        var maxDate = new Date(year, month, 0).getDate();
+                        if (parseInt(date) < 1 || parseInt(date) > maxDate) {
+                            alert("Please enter a valid date for the given month and year.");
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+                function validateForm2() {
+                    var year = document.getElementById("employee_year").value.trim();
+                    var month = document.getElementById("employee_month").value.trim();
+                    var date = document.getElementById("employee_date").value.trim();
+
+                    // Check if any field is empty
+                    if (year === "" && month === "" && date === "") {
+                        alert("Please enter at least one field.");
+                        return false;
+                    }
+
+                    // Check for invalid combinations
+                    if ((year === "" && month !== "") || (year === "" && date !== "") || (month === "" && date !== "")) {
+                        alert("Please provide complete date information.");
+                        return false;
+                    }
+
+                    // Check if year is between 2020 and 2024
+                    if (year !== "" && (parseInt(year) < 2020 || parseInt(year) > 2024)) {
+                        alert("Please enter a year between 2020 and 2024.");
+                        return false;
+                    }
+
+                    // Check if month is between 1 and 12
+                    if (month !== "" && (parseInt(month) < 1 || parseInt(month) > 12)) {
+                        alert("Please enter a month between 1 and 12.");
+                        return false;
+                    }
+
+                    // Check if date is between 1 and 31
+                    if (date !== "" && (parseInt(date) < 1 || parseInt(date) > 31)) {
+                        alert("Please enter a date between 1 and 31.");
+                        return false;
+                    }
+
+                    // Check if date is valid for the given month and year
+                    if (date !== "") {
+                        var maxDate = new Date(year, month, 0).getDate();
+                        if (parseInt(date) < 1 || parseInt(date) > maxDate) {
+                            alert("Please enter a valid date for the given month and year.");
+                            return false;
+                        }
+                    }
+
+                    return true;
+                };
+
+                function checkPasswordStrength() {
+                    var password = document.getElementById("password").value;
+                    var errorDiv = document.getElementById("password_strength_error");
+                    var uppercaseRegex = /[A-Z]/;
+                    var symbolRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+                    if (password.length < 8) {
+                        errorDiv.textContent = "Password must be at least 8 characters long";
+                    } else if (!uppercaseRegex.test(password)) {
+                        errorDiv.textContent = "Password must contain at least one uppercase letter";
+                    } else if (!symbolRegex.test(password)) {
+                        errorDiv.textContent = "Password must contain at least one symbol";
+                    } else {
+                        errorDiv.textContent = "";
+                    }
+                }
+                function validatePassword() {
+                    var password = document.getElementById("password").value;
+                    var confirmPassword = document.getElementById("confirm_password").value;
+                    var errorDiv = document.getElementById("password_match_error");
+
+                    if (password !== confirmPassword) {
+                        errorDiv.textContent = "Passwords do not match";
+                    } else {
+                        errorDiv.textContent = "";
+                    }
+                }
+
+                // Function to validate confirm password
+
+                // Automatically remove the alert after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 12000); // Adjust the time as needed (in milliseconds)
+            </script>
+</body>
+
+</html>

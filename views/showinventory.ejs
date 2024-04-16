@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .inventory-level {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Inventory</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Count</th>
+                    <th>Inventory Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let bookMap = new Map(); %>
+                <% books.forEach(book => { %>
+                    <% if (!bookMap.has(book.title)) {
+                            bookMap.set(book.title, book.frequency);
+                        } else {
+                            bookMap.set(book.title, bookMap.get(book.title) + book.frequency);
+                        } %>
+                <% }); %>
+                <% bookMap.forEach((frequency, title) => { %>
+                    <tr>
+                        <td><%= title %></td>
+                        <td><%= frequency %></td>
+                        <td class="inventory-level"><%= frequency * 13 %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

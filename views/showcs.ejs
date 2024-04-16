@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .details {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .details h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .details p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .books-purchased-container {
+            margin-top: 20px;
+        }
+
+        .book-card {
+            background-color: #d9edf7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .book-details {
+            margin-left: 10px;
+        }
+
+        .book-section {
+            margin-bottom: 10px;
+        }
+
+        .date {
+            background-color: #f08080;
+            /* Different color for the date */
+            color: #fff;
+            padding: 5px 10px;
+            /* Padding between tags */
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .seller {
+            background-color: #28a745;
+            color: #fff;
+            padding: 5px 10px;
+            /* Padding between tags */
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .copies {
+            background-color: #ffc107;
+            color: #333;
+            padding: 5px 10px;
+            /* Padding between tags */
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .price {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 5px 10px;
+            /* Padding between tags */
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .isbn {
+            background-color: #6610f2;
+            color: #fff;
+            padding: 5px 10px;
+            /* Padding between tags */
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .books-purchased ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            /* Background color of the navigation bar */
+            padding: 10px 20px;
+            /* Padding around the navigation links */
+            color: #fff;
+            /* Text color */
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Customer Details</h1>
+        <div class="details">
+            <h2>Gmail: <p>
+                    <%= customer[0].gmail %>
+                </p>
+            </h2>
+            <div class="books-purchased-container">
+                <h2>Books Purchased:</h2>
+                <div class="books-purchased">
+                    <% if (customer[0].bookspurchased && customer[0].bookspurchased.length> 0) { %>
+                        <ul>
+                            <% customer[0].bookspurchased.forEach(book=> { %>
+                                <li class="book-card">
+                                    <div class="book-details">
+                                        <div class="book-section">
+                                            <p class="date">Date: <%= book.Date %>
+                                            </p>
+                                        </div>
+                                        <div class="book-section">
+                                            <p class="seller">Seller: <%= book.seller %>
+                                            </p>
+                                        </div>
+                                        <div class="book-section">
+                                            <p class="copies">Copies: <%= book.copies %>
+                                            </p>
+                                        </div>
+                                        <div class="book-section">
+                                            <p class="price">Price: <%= book.price %>
+                                            </p>
+                                        </div>
+                                        <div class="book-section">
+                                            <p class="isbn">ISBN: <%= book.ISBN %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% }); %>
+                        </ul>
+                        <% } else { %>
+                            <p>No books purchased yet.</p>
+                            <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+         
+        .full {
+            width: 1144px;
+            height: 10000px; /* Set height to 100% to fill the parent container */
+            /* background-image: url("./Untitled-1.png"); */
+            background-size: cover; /* Ensures the background image covers the entire element */
+        }
+        #bod {
+            display: flex;
+            width:1144px;
+            height: 400px;
+            display:flex;
+            justify-content :center ;
+            align-items :center ;
+        }
+        .navbar {
+            display: flex;
+            width:1144px;
+            height: 50px;
+            backdrop-filter: blur(10px);
+            justify-content: space-around;
+            align-items: center;
+        }
+        .icon {
+            width:50px;
+            height: 50px;
+            margin-left: 186px;
+            box-sizing: border-box;
+            background-color: brown;
+            filter: brightness(70%);
+        }
+
+        .sign {
+            box-sizing: border-box; 
+            width: 10%;
+        }
+
+        .nav1 {
+            width: 50%; 
+            text-align: center;
+        }
+        .child
+{
+   padding-left: 10px;
+   margin: 20px;
+}
+
+.childmov
+{
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+}
+.cbox
+{
+    width:200px;
+    height:200px;
+    /* background-color: brown; */
+            border-style: solid;
+               border-color: green;
+               border-width: 5px;
+}
+.cbox1
+{
+    width:200px;
+    height:40px;
+    /* background-color: brown; */
+              border-style: solid;
+               border-color: green;
+               border-width: 5px;
+               overflow: auto;
+               text-align: center;
+               display: flex; /* Align content with flexbox */
+               justify-content: center; /* Center horizontally */
+              align-items: center;
+}
+
+        .thriller {
+            padding-left: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .thrilmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .frictional {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .frictmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .mystery {
+            padding-left: 10px;
+            margin: 20px;
+        }
+
+        .mymov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+       
+    <div class="full">
+        <div class="bod"></div>
+        <div class="box">
+               <h1><b> !   <%=    locals.subject       %>   </b></h1>
+        </div>
+    </div>
+    <% let list= ((locals.result).length)/5 %>
+       <% for (let i = 1; i <=list; i++) { %>
+        <div class="thriller">
+        </div>
+        <div class="thrilmov">
+            <% for (let j = 1; j <= 5; j++) { %>
+                <% let test = (locals.result)[i].get("image_url_l") %>
+                <div class="cbox" id="c1" style="width:200px; height:200px; background-color:brown; background-image:url('<%= test %>'); background-size:100% 100%;background-position:center;"></div>
+            <% } %>
+        </div>
+        <br/>
+        <div class="childmov">
+            <% for (let k = 1; k <= 5; k++) { %>
+                <div class="cbox1" id="c<%= k %>">
+                    <b><%= (locals.result)[i].get("title") %></b>
+                </div>
+            <% } %>
+        </div>
+    <% } %> 
+    
+ </div>
+
+</body>
+</html>

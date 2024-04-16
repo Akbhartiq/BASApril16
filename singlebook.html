@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+         .bod{
+            text-align: center;
+            background-color :black ;
+            color : white;
+         }
+         .border {
+            display: flex;
+            justify-content: center; /* Align items horizontally */
+            align-items: center; /* Align items vertically */
+         }
+         .box{
+               width: 1000px;
+               height: 3000px;
+               border-style: solid;
+               border-color: green;
+               border-width: 5px;
+         }
+         .thriller {
+            padding-left: 10px;
+            margin: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .thrilmov {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .cbox
+        {
+            width:200px;
+            height:200px;
+            border-style: solid;
+            border-color: green;
+            border-width: 5px;
+        }
+        .imageout{
+            display:flex ;
+            justify-content :center ;
+            align-items: center;
+        }
+        .detailsout{
+            display:flex ;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .details1{
+            height:260px;
+            border-style: solid;
+            border-color: green;
+            border-width: 5px;  
+            text-align: center; 
+            width : 45% ;
+            margin :10px ;
+        }
+        .ISBN {
+            display: flex;
+            justify-content: center;
+        }
+        .outer {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+        .inner {
+            flex-grow: 1; /* This will make the text take up the remaining space */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        .separator {
+            width: 20px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="bod">
+        <div class="qutation">
+            <h1> 
+                <b>!   BOOK IS THE BEST ONE TO GET   ! </b>
+            </h1>
+            <div class="border"> <!-- Apply .border class here -->
+                <div class="box"> 
+                    <div class="title">
+                        <div class="name">
+                            <h1>
+                                <b><%= locals.book.get("tittle") %></b>
+                            </h1>
+                        </div>
+                        <div class="imageout">
+                            <div class="cbox" id="c1" style="width:200px; height:200px; background-color:brown; background-image:url('<%= test %>'); background-size:100% 100%;background-position:center;"></div>
+                        </div>
+                        <br>
+                        <div class="detailsout">
+                            <div class="details1">
+                                <div class="ISBN outer">
+                                    <div class="inner"><b>ISBN</b></div>
+                                    <div class="separator">:-</div>
+                                    <div class="inner"><% locals.book.get("ISBN")%></div>
+                                </div>
+                                <div class="ISBN outer">
+                                    <div class="inner"><b>Author</b></div>
+                                    <div class="separator">:-</div>
+                                    <div class="inner"><% locals.book.get("author")%></div>
+                                </div>
+                                <div class="ISBN outer">
+                                    <div class="inner"><b>Publication_datte</b></div>
+                                    <div class="separator">:-</div>
+                                    <div class="inner"><% locals.book.get("publication_date")%></div>
+                                </div>
+                                <div class="ISBN outer">
+                                    <div class="inner"><b>genre</b></div>
+                                    <div class="separator">:-</div>
+                                    <div class="inner"><% locals.book.get("genre")%></div>
+                                </div>
+                                <div class="ISBN outer">
+                                    <div class="inner"><b>location_id</b></div>
+                                    <div class="separator">:-</div>
+                                    <div class="inner"><% locals.book.get("location_id")%></div>
+                                </div>
+                            </div>  
+                        </div>
+                        <br>
+                        <br>
+                        <div class="llo">
+                             <h1>!  Price  !</h1>
+                     </div> 
+                     <div class="llo">
+                        <h1></h1>
+                     </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

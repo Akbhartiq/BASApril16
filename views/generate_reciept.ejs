@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        html {
+            background: radial-gradient(circle at center, #e0f3ff, #3498db);
+            /* Extreme light blue to blue */
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            /* Ensure the html element takes up the full height of the viewport */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: radial-gradient(circle at center, #e0f3ff, #3498db);
+            /* Extreme light blue to blue */
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            /* Ensure the body element takes up the full height of the viewport */
+        }
+
+
+        .receipt {
+            max-width: 600px;
+            margin: 100px auto;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
+            /* Smooth transition for box shadow */
+            color: #fff;
+            /* Set text color to white */
+        }
+
+
+        .receipt:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            /* Apply stronger box shadow on hover */
+        }
+
+        .receipt h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .receipt-item {
+            margin-bottom: 10px;
+        }
+
+        .receipt-item label {
+            font-weight: bold;
+        }
+
+        .receipt-item span {
+            margin-left: 10px;
+        }
+
+        .print-button {
+            display: none;
+            /* Initially hide the print button */
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .emseller {
+            display: none;
+            font-weight: bold;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            padding: 10px 20px;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <div class="receipt">
+        <h1>Receipt</h1>
+        <div class="receipt-item">
+            <label>Date:</label>
+            <span>
+                <%=todayDate%>
+            </span>
+        </div>
+        <div class="receipt-item">
+            <label>Title:</label>
+            <span>
+                <%= title %>
+            </span>
+        </div>
+        <div class="receipt-item">
+            <label>Author:</label>
+            <span>
+                <%= author %>
+            </span>
+        </div>
+        <div class="receipt-item">
+            <label>Price/book:</label>
+            <span>₹<%= price %>/-</span>
+        </div>
+        <div class="receipt-item">
+            <label>Count:</label>
+            <span><%= count %>/-</span>
+        </div>
+        <div class="receipt-item">
+            <label>ISBN:</label>
+            <span>
+                <%= isbn %>
+            </span>
+        </div>
+        <div class="receipt-item">
+            <label>Total Amount:</label>
+            <span>₹<%= price*count %>/-</span>
+        </div>
+        <div class="emseller" id="seller">
+            Seller:
+        </div>
+    </div>
+
+    <!-- Button for printing -->
+    <div class="print-button" id="printButton">
+        <button onclick="printReceipt()">Print Receipt</button>
+    </div>
+
+    <script>
+        let isbnCheckInterval; // Declare a variable to hold the interval ID
+
+        async function printReceipt() {
+            window.print();
+            try {
+                const response = await fetch('/update_receipt_status?isbn=<%=isbn%>&cust=<%=customId%>');
+                console.log(response);
+                const data = await response.json();
+                console.log(data);
+            }
+            catch (error) {
+                console.error('Error updating receipt status: ', error);
+            }
+
+        }
+
+        // Function to check if ISBN is deleted
+        async function checkISBNDeleted() {
+            try {
+                // Perform an AJAX request to check if the ISBN is deleted
+                const response = await fetch(`/check_isbn_deleted?isbn=<%= isbn %>&cust=<%= customId %>`);
+                console.log(response);
+                const data = await response.json();
+                console.log(data);
+                if (data.isDeleted) {
+                    // If ISBN is deleted, show the print button
+                    document.getElementById('printButton').style.display = 'block';
+                    document.getElementById('seller').style.display = 'block';
+                    document.getElementById("seller").innerText += data.seller;
+                    // Clear the interval since ISBN is deleted
+                    clearInterval(isbnCheckInterval);
+                }
+            } catch (error) {
+                console.error('Error checking ISBN:', error);
+            }
+        }
+
+        // Start checking ISBN status periodically
+        isbnCheckInterval = setInterval(checkISBNDeleted, 2000); // Check every 2 seconds
+    </script>
+
+</body>
+
+</html>

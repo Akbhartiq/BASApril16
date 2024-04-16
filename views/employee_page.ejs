@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Page</title>
+    <style>
+        html,
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #e0f3ff, #3498db);
+            /* Extreme light blue to blue */
+            background-size: cover;
+            height: 100%;
+            /* Ensure the html and body elements take up the full height of the viewport */
+        }
+
+        body {
+            margin: 0;
+            /* Remove default margin */
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .book-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .book-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .book-card:hover {
+            transform: scale(1.03);
+        }
+
+        .book-card:nth-child(3n+1) {
+            margin-left: 0;
+        }
+
+        .book-card:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .book-card.center {
+            width: 100%;
+            margin: 50px auto;
+        }
+
+        .sell-book-input,
+        .add-book-form {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            background: radial-gradient(circle at center, #e0f3ff, #3498db);
+
+        }
+
+        .sell-book-input {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 5px;
+            /* Adjusted margin-top value */
+            background: radial-gradient(circle at center, #e0f3ff, #3498db);
+        }
+
+
+        .sell-book-input h3,
+        .add-book-form h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        select {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 97.5%;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .view-sales-btn {
+            margin-top: 20px;
+            background-color: #ffc107;
+        }
+
+        .no-books-message {
+            padding: 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 5px;
+            margin: 30px auto;
+        }
+
+        .pub-date {
+            border: 2px solid #d4d3d3;
+            /* Set border thickness and color */
+            border-radius: 100px;
+            /* Make border circular by setting border-radius */
+            margin-bottom: 10px;
+            display: inline-block;
+            /* Ensure the border wraps around the content */
+            padding: 5px 10px;
+            /* Add padding to create space between content and border */
+        }
+
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .inventory-table th,
+        .inventory-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+
+        }
+
+        .inventory-table th {
+            background-color: #f2f2f2;
+            margin-right: 200px;
+        }
+
+
+        /*Alert styling*/
+        .alert {
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .alert-info {
+            color: #0c5460;
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+
+        .alert-warning {
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+
+        /* Navigation Bar Styles */
+        nav {
+            background-color: #333;
+            padding: 10px 20px;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        nav ul {
+            list-style-type: none;
+            /* Remove default bullet points */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            /* Display list items horizontally */
+            margin-right: 20px;
+            /* Spacing between each list item */
+        }
+
+        nav ul li a {
+            color: #fff;
+            /* Text color of the links */
+            text-decoration: none;
+            /* Remove underline */
+            font-weight: bold;
+            /* Make the text bold */
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            /* Underline on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+    </nav>
+    <% if (message) { %>
+        <div class="alert" id="alertMessage">
+            <%= message %>
+        </div>
+
+        <% } %>
+            <div class="container">
+                <% if (books.length> 0) { %>
+                    <% var rowCount=Math.ceil(books.length / 3); %>
+                        <% for (var i=0; i < rowCount; i++) { %>
+                            <div class="book-row">
+                                <% for (var j=i * 3; j < Math.min((i + 1) * 3, books.length); j++) { %>
+                                    <div class="book-card<%= books.length === 1 ? ' center' : '' %>"
+                                        data-isbn="<%= books[j].ISBN %>">
+                                        <div><b>Title:</b>
+                                            <%= books[j].title %>
+                                        </div>
+                                        <div><b>Author:</b>
+                                            <%= books[j].author %>
+                                        </div>
+                                        <div><b>ISBN:</b>
+                                            <%= books[j].ISBN %>
+                                        </div>
+                                        <div><b>Price:</b> ₹<%= books[j].price %>
+                                        </div>
+                                        <div><b>Publication Date:</b>
+                                            <%= books[j].publication_date %>
+                                        </div>
+                                        <div><b>Customer:</b>
+                                            <%= books[j].customerid.emailOfUser %>
+                                        </div>
+                                        <div>
+                                            <b>Number Of copies Asked:</b>
+                                            <%=books[j].count%>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                            <% } %>
+                                <% } else { %>
+                                    <div class="no-books-message">No Currently Ordered books available</div>
+                                    <% } %>
+                                        <% if (books.length> 0) { %>
+                                            <div class="sell-book-input" id="sell-book-id">
+                                                <h3>Sell the book</h3>
+                                                <input type="text" placeholder="Enter ISBN number" id="isbnInput">
+                                                <input type="email" placeholder="Buyer Id" id="buyerInput">
+                                                <input type="number" placeholder="count" id="count">
+                                                <button onclick="sellBook()">Sell</button>
+                                            </div>
+                                            <% } %>
+                                                
+
+
+                                                <button class="view-inventory-btn" onclick="viewInventory()">View
+                                                    Arrived Stock</button>
+                                                <div id="inventoryDisplay"></div>
+
+
+                                                <div class="add-book-form" id="add-book-form-id">
+                                                    <h3>Add New Book</h3>
+                                                    <form id="addBookForm" action="/book-request" method="post">
+                                                        <label for="titleInput">Title:</label>
+                                                        <input type="text" id="titleInput" name="titleInput"
+                                                            placeholder="Title" required>
+
+                                                        <label for="authorInput">Author:</label>
+                                                        <input type="text" id="authorInput" name="authorInput"
+                                                            placeholder="Author" required>
+
+                                                        <label for="isbnInput">ISBN:</label>
+                                                        <input type="text" id="isbnInput" name="isbnInput"
+                                                            placeholder="ISBN" required>
+
+                                                        <label for="subjectInput">Subject:</label>
+                                                        <input type="text" id="subjectInput" name="subjectInput"
+                                                            placeholder="Subject">
+
+                                                        <label for="imageLinkInput">Image Link:</label>
+                                                        <input type="text" id="imageLinkInput" name="imageLinkInput"
+                                                            placeholder="Image Link">
+
+                                                        <div class="pub-date">
+                                                            <label for="publicationDateInput">Publication Date:</label>
+                                                            <input type="date" id="publicationDateInput"
+                                                                name="publicationDateInput"
+                                                                placeholder="Publication Date">
+                                                        </div>
+
+                                                        <label for="priceInput">Price:</label>
+                                                        <input type="number" id="priceInput" name="priceInput"
+                                                            placeholder="Price" required>
+
+                                                        <label for="copiesInput">Number of Copies:</label>
+                                                        <input type="number" id="copiesInput" name="copiesInput"
+                                                            placeholder="Number of Copies" required>
+
+                                                        <label for="location">Location</label>
+                                                        <input type="text" id="location" name="location"
+                                                            placeholder="location" required>
+                                                            <input type="submit" value="Add" style="color: white; font-weight: bold; font-size: larger; background-color: blue; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+
+                                                    </form>
+
+                                                    <h3>Business data of an employ</h3>
+                                                    <form action="/view-business-data-employee-by-emoloyee" method="get"
+                                                        onsubmit="return validateForm1()">
+                                                        <input type="number" id="emp_year" name="year"
+                                                            placeholder="Year" />
+                                                        <input type="number" id="emp_month" name="month"
+                                                            placeholder="Month" />
+                                                        <input type="number" id="emp_date" name="date"
+                                                            placeholder="Date" />
+                                                        <button type="submit">View Business Data of an employ</button>
+                                                        <!-- Submit button -->
+
+                                                    </form>
+                                                </div>
+
+            </div>
+
+
+            <script>
+                //Function to see the inventory received
+
+                // Function to handle the click event of the "View Inventory" button
+                function viewInventory() {
+                    // Call the API to retrieve inventory data
+                    fetch('/api/inventory')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Clear any existing inventory display
+                            document.getElementById('inventoryDisplay').innerHTML = '';
+
+                            // Create a table element
+                            const table = document.createElement('table');
+                            table.classList.add('inventory-table');
+
+                            // Create table headers
+                            const headers = ['Title', 'Author', 'ISBN', 'Subject', 'ImageLink', 'PublicationDate', 'Price', 'Count']; // Add more headers as needed
+                            const headerRow = document.createElement('tr');
+                            headers.forEach(headerText => {
+                                const th = document.createElement('th');
+                                th.textContent = headerText;
+                                headerRow.appendChild(th);
+                            });
+                            table.appendChild(headerRow);
+
+                            // Loop through the inventory data and add rows to the table
+                            data.forEach(item => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td>${item.title}</td>
+                                    <td>${item.author}</td>
+                                    <td>${item.ISBN}</td>
+                                    <td>${item.subject}</td>
+                                    <td>${item.image_url_l}</td>
+                                    <td>${item.publication_date}</td>
+                                    <td>${item.price}</td>
+                                    <td>${item.frequency}</td>
+                                    <!-- Add more columns for additional details -->
+                                `;
+                                table.appendChild(row);
+                            });
+
+                            // Append the table to the inventory display
+                            document.getElementById('inventoryDisplay').appendChild(table);
+                        })
+                        .catch(error => console.error('Error fetching inventory:', error));
+                }
+
+
+                async function sellBook() {
+                    // Get the ISBN input value
+                    var isbnInput = document.getElementById('isbnInput').value;
+                    var buyerInput = document.getElementById('buyerInput').value;
+                    console.log(isbnInput);
+                    var freqCopies = document.getElementById('count').value;
+                    
+                    // Send a request to delete the book with the entered ISBN number
+                    try {
+                        const response = await fetch(`/delete-book/${isbnInput}/${buyerInput}/${freqCopies}`, {
+                            method: 'DELETE'
+                        });
+                        if (response.ok) {
+                            console.log('Book with ISBN', isbnInput, 'deleted successfully');
+                            // Optionally, you can update the UI to reflect the deletion
+                            // Remove the deleted book from the UI
+                            const deletedBookElement = document.querySelector(`.book-card[data-isbn="${isbnInput}"]`);
+                            if (deletedBookElement) {
+                                deletedBookElement.remove();
+                            }
+                            // Check if there are no more books remaining
+                            const remainingBooks = document.querySelectorAll('.book-card');
+                            if (remainingBooks.length === 0) {
+                                const container = document.querySelector('.container');
+                                //container.innerHTML = '<div class="no-books-message">No Currently Ordered books available</div>';
+                                // Automatically refresh the page after 5 seconds
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 5); // Adjust the delay as needed
+                            }
+
+                            //Now do one thing , since the book has been sold
+                        } else {
+                            console.error('Failed to delete book with ISBN', isbnInput);
+                            // Optionally, handle errors or display a message to the user
+                        }
+                    } catch (error) {
+                        console.error('Error deleting book:', error);
+                        // Handle errors
+                    }
+                }
+
+                async function viewSales() {
+                    // Implement the logic to view sales history and revenue
+                    console.log('Viewing sales history and revenue');
+                }
+
+                async function addBook(event) {
+                    event.preventDefault(); // Prevent the default form submission behavior
+
+                    // Get the input values
+                    var titleInput = document.getElementById('titleInput').value;
+                    var authorInput = document.getElementById('authorInput').value;
+                    var isbnInput = document.getElementById('isbnInput').value;
+                    var subjectInput = document.getElementById('subjectInput').value;
+                    var publicationDateInput = document.getElementById('publicationDateInput').value;
+                    var priceInput = document.getElementById('priceInput').value;
+                    var copiesInput = document.getElementById('copiesInput').value;
+
+                    // Send a request to add the book to the database
+                    // Implement the backend API endpoint to handle book addition
+
+                    console.log('Add book to database:', titleInput, authorInput, isbnInput, subjectInput, publicationDateInput, priceInput, copiesInput);
+                }
+                // Automatically remove the alert after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('alertMessage').style.display = 'none';
+                }, 1200); // Adjust the time as needed (in milliseconds)
+
+                function validateForm1() {
+                    var year = document.getElementById('emp_year').value.trim();
+                    var month = document.getElementById('emp_month').value.trim();
+                    var date = document.getElementById('emp_date').value.trim();
+
+                    console.log(year, month, date);
+
+                    // Check if any field for date is empty
+                    if (year === "" && month === "" && date === "") {
+                        alert("Please enter at least one field for date.");
+                        return false;
+                    }
+
+                    // Check for invalid combinations
+                    if ((year === "" && month !== "") || (year === "" && date !== "") || (month === "" && date !== "")) {
+                        alert("Please provide complete date information.");
+                        return false;
+                    }
+
+                    // Check if year is between 2020 and 2024
+                    if (year !== "" && (parseInt(year) < 2020 || parseInt(year) > 2024)) {
+                        alert("Please enter a year between 2020 and 2024.");
+                        return false;
+                    }
+
+                    // Check if month is between 1 and 12
+                    if (month !== "" && (parseInt(month) < 1 || parseInt(month) > 12)) {
+                        alert("Please enter a month between 1 and 12.");
+                        return false;
+                    }
+
+                    // Check if date is between 1 and 31
+                    if (date !== "" && (parseInt(date) < 1 || parseInt(date) > 31)) {
+                        alert("Please enter a date between 1 and 31.");
+                        return false;
+                    }
+
+                    // Check if date is valid for the given month and year
+                    if (date !== "") {
+                        var maxDate = new Date(year, month, 0).getDate();
+                        if (parseInt(date) < 1 || parseInt(date) > maxDate) {
+                            alert("Please enter a valid date for the given month and year.");
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+
+            </script>
+</body>
+
+</html>

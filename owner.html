@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+        }
+        
+        .bod {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .needed {
+            width: 25%;
+            height: 1000px;
+            border-color: green;
+            border-width: 2px;
+            border-style: solid;
+            margin: 5px;
+        }
+        .employ {
+            width: 50%;
+            height: 1000px;
+            border-color: green;
+            border-width: 2px;
+            border-style: solid;
+            margin: 5px;
+        }
+        .order {
+            width: 25%;
+            height: 1000px;
+            border-color: green;
+            border-width: 2px;
+            border-style: solid;
+            margin: 5px;
+        }
+        .needb {
+            border-width: 2px;
+            border-color: green;
+            border-style: solid;
+            margin: 2px;
+        }
+        
+        /* Additional CSS for form styling */
+        .form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form input {
+            width: 282px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1> Business is a Big thing</h1>
+    </div>
+    <div class="bod">
+         <div class="needed">
+          <div class="needb">
+             <h1>Requested_Books</h1> 
+          </div>
+          <br>
+         </div> 
+       <div class="employ">
+            <div class="needb">
+                 <h1>Adding_employ</h1> 
+             </div>
+             <br>
+             <form class="form" action="#">
+                   gmail : <input type="gmail" id ="gmail" required>
+                   password: <input type="text" id="password" required>
+                   <button type="submit" class="submit-btn">Submit</button>
+             </form>
+             <br>   
+             <div class="needb">
+                <h1>Remove_employ</h1> 
+            </div>
+             <form class="form" action="#">
+                gmail : <input type="gmail" id ="gmail" required>
+                <button type="submit" class="submit-btn">Submit</button>
+          </form>
+          <br>
+          <div class="needb">
+            <h1>Order_For_Book</h1>
+        </div>
+            <form class="form" action="#">
+                <input type="gmail" id="gmail" placeholder="Book_name" required>
+                <button type="submit" class="submit-btn">Submit</button>
+          </form> 
+       <br>
+              <div class="needb">
+                  <h1> Accounts</h1>
+             </div> 
+        
+             
+       </div>
+       <div class="order">
+        <div class="needb">
+            <h1>Book_less_ther</h1> 
+         </div>
+         <br>
+       </div>
+    </div>
+</body>
+</html> 
+

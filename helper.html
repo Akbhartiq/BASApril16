@@ -1,0 +1,50 @@
+<div class="books" >
+    <div class="child" >
+        <h1 style="margin: 0;"><%= genre %></h1>
+    </div>
+    <div class="childmov">
+        <div class="cbox" id="c2" >
+                        <img src="<%= result[i].image_url_l %>" >
+                    </div>
+                </div> 
+                <br>
+                <div class="childmov" >
+                    <div class="cbox1"  >
+                        <b><%= result1[i].title %></b>
+                    </div>  
+                </div>
+            </div>  
+        </div>
+
+
+
+
+
+{% comment %} 
+
+
+
+        <% for (let genre of locals.list) { %>
+            <div class="books" >
+                   <div class="child" >
+                       <h1 style="margin: 0;"><%= genre %></h1>
+                   </div>
+               <div class="childmov">
+                   <% for (let i = 0; i < Math.min(result.length, 6); i++) { %>
+                       
+                       <div class="cbox" id="c2" >
+                           <img src="<%= result[i].image_url_l %>" >
+                       </div>
+                   <% } %>
+               </div> 
+               <br>
+               <div class="childmov" >
+                   <% const result1 = locals.books.filter(book => book.subject === genre); %>
+                   <% for (let i = 0; i < Math.min(result1.length, 6); i++) { %>
+                       <div class="cbox1"  >
+                           <b><%= result1[i].title %></b>
+                       </div>  
+                   <% } %>
+               </div>
+           <% } %>
+       </div>   {% endcomment %}
